@@ -15,7 +15,6 @@ logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger('app')
 
 
-
 class MainHandler(tornado.web.RequestHandler):
 
     @tornado.web.asynchronous

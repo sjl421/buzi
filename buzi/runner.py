@@ -22,7 +22,7 @@ def run(services=None):
         logger.debug("received - %s", value)
         v = json.loads(value)
         ret = services[v['fn']]['fn'](*v['args'], **v['kwargs'])
-        redis_conn.lpush('fn_result_%s' % v['uuid'], json.dumps(ret))
+        redis_conn.lpush('fn_result_%s' % v['uuid'], json.dumps({'result':ret}))
         logger.debug("returned - %s %s msecs", v['fn'], (time.time() - t1))
 
 if __name__ == '__main__':

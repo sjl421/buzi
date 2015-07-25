@@ -35,7 +35,10 @@ class Buzi(object):
         for k, v in ret.iteritems():
             ret_val = v
 
-        callback(json.loads(ret_val))
+        result = json.loads(ret_val)
+        if 'error' in result:
+            raise Exception(result['error'])
+        callback(result['result'])
 
     def call(self, *args, **kwargs):
         try:

@@ -23,4 +23,7 @@ class Buzi(object):
         while True:
             ret = redis_conn.blpop('fn_result_%s' % d['uuid'])
             if ret:
-                return json.loads(ret[1])
+                result = json.loads(ret[1])
+                if 'error' in result:
+                    raise Exception(result['error'])
+                return result['result']
