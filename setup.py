@@ -15,7 +15,11 @@ setup(
     author_email='aybars.badur@gmail.com',
     packages=['buzi'],
     install_requires=['redis'],
-    scripts=['./hst/bin/hst'],
+    entry_points={
+        'console_scripts': [
+            'buzi = buzi.main:main',
+        ]
+    },
     classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
