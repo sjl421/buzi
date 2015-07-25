@@ -1,4 +1,7 @@
 from buzi.deco import service, services
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.debug("hello")
 
 @service("foo")
 def foo(a, b):
