@@ -14,7 +14,7 @@ setup(
     url="http://github.com/ybrs/buzi",
     author_email='aybars.badur@gmail.com',
     packages=['buzi'],
-    install_requires=['redis'],
+    install_requires=['redis', 'PyYaml'],
     entry_points={
         'console_scripts': [
             'buzi = buzi.main:main',

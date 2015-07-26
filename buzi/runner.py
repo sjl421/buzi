@@ -13,10 +13,11 @@ def run(services=None):
     redis_conn = get_connection()
     chans = []
     for k, v in services.items():
+        logger.debug("listening for - %s", k)
         chans.append('fn_%s' % k)
 
     while True:
-        t = redis_conn.blpop(*chans)
+        t = redis_conn.blpop(chans)
         queue_name, value = t
         t1 = time.time()
         logger.debug("received - %s", value)
