@@ -12,7 +12,7 @@ def run(services=None):
 
     redis_conn = get_connection()
     chans = []
-    for k, v in services.iteritems():
+    for k, v in services.items():
         logger.debug("listening for - %s", k)
         chans.append('fn_%s' % k)
 
@@ -21,7 +21,8 @@ def run(services=None):
         queue_name, value = t
         t1 = time.time()
         logger.debug("received - %s", value)
-        v = json.loads(value)
+
+        v = json.loads(value.decode('utf-8'))
         ret = services[v['fn']]['fn'](*v['args'], **v['kwargs'])
         redis_conn.lpush('fn_result_%s' % v['uuid'], json.dumps({'result':ret}))
         logger.debug("returned - %s %s msecs", v['fn'], (time.time() - t1))
